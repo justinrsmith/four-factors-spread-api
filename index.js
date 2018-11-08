@@ -1,18 +1,17 @@
 const serverless = require('serverless-http');
 const express = require('express');
-const { getSchedule } = require('./db.js');
 const cors = require('cors');
-const moment = require('moment');
+const { getSchedule } = require('./db.js');
+
 const app = express();
 
 app.use(cors());
 app.get('/', (req, res) => {
-  getSchedule(function(err, data) {
+  getSchedule((err, data) => {
     if (err) {
       return res(err);
-    } else {
-      return res.json(data);
     }
+    return res.json(data);
   });
 });
 
